@@ -1,8 +1,21 @@
 import cv2
 from ultralytics import YOLO
+import os
+
+#=================================================================
+#초기값 설정
+#=================================================================
+#실행 경로 설정 
+# 경로 설정
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+Models_dir = os.path.abspath(os.path.join(script_dir, "../00_Models"))
+Videos_dir = os.path.abspath(os.path.join(script_dir, "../00_Sample_Video"))
+
+model_file = os.path.join(Models_dir, "yolov8n-pose.pt" )
 
 # 1. YOLOv8 Pose 모델 불러오기 (미리 학습된 모델 사용)
-model = YOLO('yolov8n-pose.pt')  # 'n'은 모델 크기 옵션 (n, s, m, l, x)
+model = YOLO(model_file)  # 'n'은 모델 크기 옵션 (n, s, m, l, x)
 
 # 2. 실시간 카메라 비디오 스트림 열기
 cap = cv2.VideoCapture(0)  # 0번 카메라 열기

@@ -1,12 +1,23 @@
 import cv2
 from ultralytics import YOLO
 import pandas as pd
+import os
+
+#=================================================================
+#초기값 설정
+#=================================================================
+#실행 경로 설정 
+# 경로 설정
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+Models_dir = os.path.abspath(os.path.join(script_dir, "../00_Models"))
+model_file = os.path.join(Models_dir, "yolov8n-pose.pt" )
 
 save_dir = './pose_img/person/'
 keypoint_path = f'{save_dir}keypoints.csv'
 
 # YOLOv8 포즈 추정 모델 불러오기
-model = YOLO("yolov8n-pose.pt")
+model = YOLO(model_file)
 
 # 카메라 또는 비디오 캡처 객체 생성 (0은 기본 웹캠)
 cap = cv2.VideoCapture(0)

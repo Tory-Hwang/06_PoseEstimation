@@ -2,12 +2,23 @@ from ultralytics import YOLO
 import cv2
 import xgboost as xgb
 import pandas as pd
+import os
+
+#=================================================================
+#초기값 설정
+#=================================================================
+#실행 경로 설정 
+# 경로 설정
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+Models_dir = os.path.abspath(os.path.join(script_dir, "../00_Models"))
+model_file = os.path.join(Models_dir, "yolov8n-pose.pt" )
 
 save_dir = './pose_img/person/'
 weight_file = f'{save_dir}model_weights.xgb'
 
 # YOLOv8 모델 로드
-model_yolo = YOLO('yolov8n-pose.pt')
+model_yolo = YOLO(model_file)
 
 # XGBoost 모델 로드 (Booster 대신 XGBClassifier 사용)
 model = xgb.XGBClassifier()
